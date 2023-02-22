@@ -31,7 +31,7 @@ namespace Mission8_Project.Controllers
             ViewBag.Categories = tContext.Categories.ToList();
             ViewBag.Quadrants = tContext.Quadrants.ToList();
 
-            return View();
+            return View("NewTask", new TaskForm());
         }
 
         [HttpPost]
@@ -43,7 +43,7 @@ namespace Mission8_Project.Controllers
                 tContext.Add(t);
                 tContext.SaveChanges();
 
-                return View("Confirmation", t);
+                return View("Index", t);
             }
             else
             {
