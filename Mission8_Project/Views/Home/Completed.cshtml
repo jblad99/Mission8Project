@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Completed";
+}
+
+@model TaskForm
+
+<h2>Confirm Completion</h2>
+<h3>Are you sure you completed "@Model.Task"?</h3>
+
+<form method="post" asp-controller="Home" asp-action="Completed">
+    <input type="hidden" value="true" asp-for="Completed" />
+    <button type="submit">Delete</button>
+    <a asp-action="Quadrants" class="btn btn-primary">Cancel</a>
+
+    <input type="hidden" asp-for="TaskId" />
+</form>
