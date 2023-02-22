@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Mission8_Project.Models;
 using System;
@@ -11,11 +12,11 @@ namespace Mission8_Project.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private TaskContext tContext { get; set; }
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(TaskContext someName)
         {
-            _logger = logger;
+            tContext = someName;
         }
 
         public IActionResult Index()
@@ -23,15 +24,97 @@ namespace Mission8_Project.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        [HttpGet]
+        public IActionResult NewTask()
         {
-            return View();
+            //Includes the separate categories class in the MoviesForm view
+            ViewBag.Categories = tContext.Categories.ToList();
+            ViewBag.Quadrants = tContext.Quadrants.ToList();
+
+            return View("NewTask", new TaskForm());
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        [HttpPost]
+        public IActionResult NewTask(TaskForm t)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            if (ModelState.IsValid)
+            {
+                //if valid, saves changes to the database
+                tContext.Add(t);
+                tContext.SaveChanges();
+
+                return View("Index");
+            }
+            else
+            {
+                ViewBag.Categories = tContext.Categories.ToList();
+                ViewBag.Quadrants = tContext.Quadrants.ToList();
+
+                return View();
+            }
+        }
+        public IActionResult Quadrants()
+        {
+            var tasks = tContext.Responses
+                .Include(x => x.Category)
+                //.Where(x => x.CreeperStalker == false)
+                .OrderBy(x => x.Task)
+                .ToList();
+
+            return View(tasks);
+        }
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            ViewBag.Categories = tContext.Categories.ToList();
+            ViewBag.Quadrants = tContext.Quadrants.ToList();
+
+            var task = tContext.Responses.Single(x => x.TaskId == id);
+
+            return View("NewTask", task);
+        }
+        [HttpPost]
+        public IActionResult Edit(TaskForm blah)
+        {
+            //Using this to update the database
+            tContext.Update(blah);
+            tContext.SaveChanges();
+
+            return RedirectToAction("Quadrants");
+        }
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var task = tContext.Responses.Single(x => x.TaskId == id);
+
+            return View(task);
+        }
+        [HttpPost]
+        public IActionResult Delete(TaskForm t)
+        {
+            //Delete a movie from the database
+            tContext.Responses.Remove(t);
+            tContext.SaveChanges();
+
+            return RedirectToAction("Quadrants");
+        }
+
+        [HttpGet]
+        public IActionResult Completed(int id)
+        {
+            ViewBag.Categories = tContext.Categories.ToList();
+            ViewBag.Quadrants = tContext.Quadrants.ToList();
+            var task = tContext.Responses.Single(x => x.TaskId == id);
+
+            return View("Completed", task);
+        }
+        [HttpPost]
+        public IActionResult Completed(TaskForm t)
+        {
+            tContext.Update(t);
+            tContext.SaveChanges();
+
+            return RedirectToAction("Quadrants");
         }
     }
 }
