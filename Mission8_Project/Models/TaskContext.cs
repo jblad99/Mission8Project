@@ -20,10 +20,10 @@ namespace Mission8_Project.Models
         protected override void OnModelCreating(ModelBuilder mb)
         {
             mb.Entity<Category>().HasData(
-                new Category { Categories = "Home" },
-                new Category { Categories = "School" },
-                new Category { Categories = "Work" },
-                new Category { Categories = "Church" }
+                new Category { CategoryId=1, Categories = "Home" },
+                new Category { CategoryId = 2, Categories = "School" },
+                new Category { CategoryId = 3, Categories = "Work" },
+                new Category { CategoryId = 4, Categories = "Church" }
                 );
             mb.Entity<Quadrant>().HasData(
                 new Quadrant { QuadrantId = 1, Quadrants = "Quadrant 1" },
