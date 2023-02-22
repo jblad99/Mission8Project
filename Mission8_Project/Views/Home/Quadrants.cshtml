@@ -3,117 +3,139 @@
 }
 @model List<TaskForm>
 
-<div class="tl">
-    <table>
-        <thead>Urgent</thead>
-        <tbody>
-            @foreach (var x in Model)
-            {
-                @if (x.QuadrantId == 1)
-                {
-                    @if (x.Completed == false)
-                    {
-                        <tr>
-                            <td>@x.Task</td>
-                            <td>@x.Date</td>
-                            <td>@x.Category</td>
-                            <td><a asp-controller="Home" asp-action="Complete" asp-route-id="@x.TaskId">Completed? click here</a></td>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td></td>
+            <td>Urgent</td>
+            <td>Non Urgent</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Important</td>
+            <td>
+                <div class="tl">
+                    <table class="table table-bordered">
+                        <tbody>
+                            @foreach (var x in Model)
+                            {
+                                @if (x.QuadrantId == 1)
+                                {
+                                    @if (x.Completed == false)
+                                    {
+                                        <tr>
+                                            <td>@x.Task</td>
+                                            <td>@x.Date</td>
+                                            <td>@x.Category</td>
+                                            <td><a asp-controller="Home" asp-action="Complete" asp-route-id="@x.TaskId">Completed? click here</a></td>
 
-                            <td><a asp-controller="Home" asp-action="Edit" asp-route-id="@x.TaskId">Edit</a></td>
-                            <td><a asp-controller="Home" asp-action="Delete" asp-route-id="@x.TaskId">Delete</a></td>
+                                            <td><a asp-controller="Home" asp-action="Edit" asp-route-id="@x.TaskId">Edit</a></td>
+                                            <td><a asp-controller="Home" asp-action="Delete" asp-route-id="@x.TaskId">Delete</a></td>
 
-                        </tr>
+                                        </tr>
 
-                    }
-                }
-            }
-        </tbody>
-    </table>
-    
-</div>
-<div class="tr">
-    <table>
-        <thead>Non Urgent</thead>
-        <tbody>
-            @foreach (var x in Model)
-            {
-                @if (x.QuadrantId == 2)
-                {
-                    @if (x.Completed == false)
-                    {
-                        <tr>
-                            <td>@x.Task</td>
-                            <td>@x.Date</td>
-                            <td>@x.Category</td>
-                            <td><a asp-controller="Home" asp-action="Complete" asp-route-id="@x.TaskId">Completed? click here</a></td>
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
 
-                            <td><a asp-controller="Home" asp-action="Edit" asp-route-id="@x.TaskId">Edit</a></td>
-                            <td><a asp-controller="Home" asp-action="Delete" asp-route-id="@x.TaskId">Delete</a></td>
+                </div>
+            </td>
+            <td>
+                <div class="tr">
+                    <table class="table table-bordered">
+                        <thead>Non Urgent</thead>
+                        <tbody>
+                            @foreach (var x in Model)
+                            {
+                                @if (x.QuadrantId == 2)
+                                {
+                                    @if (x.Completed == false)
+                                    {
+                                        <tr>
+                                            <td>@x.Task</td>
+                                            <td>@x.Date</td>
+                                            <td>@x.Category</td>
+                                            <td><a asp-controller="Home" asp-action="Complete" asp-route-id="@x.TaskId">Completed? click here</a></td>
 
-                        </tr>
+                                            <td><a asp-controller="Home" asp-action="Edit" asp-route-id="@x.TaskId">Edit</a></td>
+                                            <td><a asp-controller="Home" asp-action="Delete" asp-route-id="@x.TaskId">Delete</a></td>
 
-                    }
-                }
-            }
-        </tbody>
-    </table>
+                                        </tr>
 
-</div>
-<div class="bl">
-    <table>
-        <tbody>
-            @foreach (var x in Model)
-            {
-                @if (x.QuadrantId == 3)
-                {
-                    @if (x.Completed == false)
-                    {
-                        <tr>
-                            <td>@x.Task</td>
-                            <td>@x.Date</td>
-                            <td>@x.Category</td>
-                            <td><a asp-controller="Home" asp-action="Complete" asp-route-id="@x.TaskId">Completed? click here</a></td>
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Non Important</td>
+            <td>
+                <div class="bl">
+                    <table class="table table-bordered">
+                        <tbody>
+                            @foreach (var x in Model)
+                            {
+                                @if (x.QuadrantId == 3)
+                                {
+                                    @if (x.Completed == false)
+                                    {
+                                        <tr>
+                                            <td>@x.Task</td>
+                                            <td>@x.Date</td>
+                                            <td>@x.Category</td>
+                                            <td><a asp-controller="Home" asp-action="Complete" asp-route-id="@x.TaskId">Completed? click here</a></td>
 
-                            <td><a asp-controller="Home" asp-action="Edit" asp-route-id="@x.TaskId">Edit</a></td>
-                            <td><a asp-controller="Home" asp-action="Delete" asp-route-id="@x.TaskId">Delete</a></td>
+                                            <td><a asp-controller="Home" asp-action="Edit" asp-route-id="@x.TaskId">Edit</a></td>
+                                            <td><a asp-controller="Home" asp-action="Delete" asp-route-id="@x.TaskId">Delete</a></td>
 
-                        </tr>
+                                        </tr>
 
-                    }
-                }
-            }
-        </tbody>
-    </table>
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
 
-</div>
-<div class="br">
-    <table>
-        <tbody>
-            @foreach (var x in Model)
-            {
-                @if (x.QuadrantId == 4)
-                {
-                    @if (x.Completed == false)
-                    {
-                        <tr>
-                            <td>@x.Task</td>
-                            <td>@x.Date</td>
-                            <td>@x.Category</td>
-                            <td><a asp-controller="Home" asp-action="Complete" asp-route-id="@x.TaskId">Completed? click here</a></td>
+                </div>
+            </td>
+            <td>
+                <div class="br">
+                    <table class="table table-bordered">
+                        <tbody>
+                            @foreach (var x in Model)
+                            {
+                                @if (x.QuadrantId == 4)
+                                {
+                                    @if (x.Completed == false)
+                                    {
+                                        <tr>
+                                            <td>@x.Task</td>
+                                            <td>@x.Date</td>
+                                            <td>@x.Category</td>
+                                            <td><a asp-controller="Home" asp-action="Complete" asp-route-id="@x.TaskId">Completed? click here</a></td>
 
-                            <td><a asp-controller="Home" asp-action="Edit" asp-route-id="@x.TaskId">Edit</a></td>
-                            <td><a asp-controller="Home" asp-action="Delete" asp-route-id="@x.TaskId">Delete</a></td>
+                                            <td><a asp-controller="Home" asp-action="Edit" asp-route-id="@x.TaskId">Edit</a></td>
+                                            <td><a asp-controller="Home" asp-action="Delete" asp-route-id="@x.TaskId">Delete</a></td>
 
-                        </tr>
+                                        </tr>
 
-                    }
-                }
-            }
-        </tbody>
-    </table>
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
 
-</div>
-
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
 
 <style>
     .tl {
