@@ -64,12 +64,12 @@ namespace Mission8_Project.Controllers
             return View(tasks);
         }
         [HttpGet]
-        public IActionResult Edit(int taskid)
+        public IActionResult Edit(int id)
         {
             ViewBag.Categories = tContext.Categories.ToList();
             ViewBag.Quadrants = tContext.Quadrants.ToList();
 
-            var task = tContext.Responses.Single(x => x.TaskId == taskid);
+            var task = tContext.Responses.Single(x => x.TaskId == id);
 
             return View("NewTask", task);
         }
@@ -83,9 +83,9 @@ namespace Mission8_Project.Controllers
             return RedirectToAction("Quadrants");
         }
         [HttpGet]
-        public IActionResult Delete(int taskid)
+        public IActionResult Delete(int id)
         {
-            var task = tContext.Responses.Single(x => x.TaskId == taskid);
+            var task = tContext.Responses.Single(x => x.TaskId == id);
 
             return View(task);
         }
