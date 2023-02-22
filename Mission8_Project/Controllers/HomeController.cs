@@ -43,7 +43,7 @@ namespace Mission8_Project.Controllers
                 tContext.Add(t);
                 tContext.SaveChanges();
 
-                return View("Index");
+                return View("Quadrants");
             }
             else
             {
