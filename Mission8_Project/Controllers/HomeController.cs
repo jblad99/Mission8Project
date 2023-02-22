@@ -98,5 +98,23 @@ namespace Mission8_Project.Controllers
 
             return RedirectToAction("Quadrants");
         }
+
+        [HttpGet]
+        public IActionResult Completed(int id)
+        {
+            ViewBag.Categories = tContext.Categories.ToList();
+            ViewBag.Quadrants = tContext.Quadrants.ToList();
+            var task = tContext.Responses.Single(x => x.TaskId == id);
+
+            return View("Completed", task);
+        }
+        [HttpPost]
+        public IActionResult Completed(TaskForm t)
+        {
+            tContext.Update(t);
+            tContext.SaveChanges();
+
+            return RedirectToAction("Quadrants");
+        }
     }
 }
