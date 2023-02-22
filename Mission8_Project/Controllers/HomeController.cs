@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Mission8_Project.Models;
 using System;
@@ -27,7 +28,7 @@ namespace Mission8_Project.Controllers
         public IActionResult NewTask()
         {
             //Includes the separate categories class in the MoviesForm view
-            ViewBag.Categories = tContext.Category.ToList();
+            ViewBag.Categories = tContext.Categories.ToList();
 
             return View();
         }
@@ -45,7 +46,7 @@ namespace Mission8_Project.Controllers
             }
             else
             {
-                ViewBag.Categories = tContext.Category.ToList();
+                ViewBag.Categories = tContext.Categories.ToList();
 
                 return View();
             }
@@ -55,7 +56,7 @@ namespace Mission8_Project.Controllers
             var tasks = tContext.Responses
                 .Include(x => x.Category)
                 //.Where(x => x.CreeperStalker == false)
-                .OrderBy(x => x.Title)
+                .OrderBy(x => x.Task)
                 .ToList();
 
             return View(tasks);
@@ -63,7 +64,7 @@ namespace Mission8_Project.Controllers
         [HttpGet]
         public IActionResult Edit(int taskid)
         {
-            ViewBag.Categories = tContext.Category.ToList();
+            ViewBag.Categories = tContext.Categories.ToList();
 
             var task = tContext.Responses.Single(x => x.TaskId == taskid);
 
