@@ -29,6 +29,7 @@ namespace Mission8_Project.Controllers
         {
             //Includes the separate categories class in the MoviesForm view
             ViewBag.Categories = tContext.Categories.ToList();
+            ViewBag.Quadrants = tContext.Quadrants.ToList();
 
             return View();
         }
@@ -47,6 +48,7 @@ namespace Mission8_Project.Controllers
             else
             {
                 ViewBag.Categories = tContext.Categories.ToList();
+                ViewBag.Quadrants = tContext.Quadrants.ToList();
 
                 return View();
             }
@@ -65,6 +67,7 @@ namespace Mission8_Project.Controllers
         public IActionResult Edit(int taskid)
         {
             ViewBag.Categories = tContext.Categories.ToList();
+            ViewBag.Quadrants = tContext.Quadrants.ToList();
 
             var task = tContext.Responses.Single(x => x.TaskId == taskid);
 
