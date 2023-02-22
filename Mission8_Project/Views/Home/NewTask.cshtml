@@ -21,7 +21,7 @@
             <option value="">Select a Quadrant</option>
             @foreach (Quadrant q in ViewBag.Quadrants)
             {
-                <option value="@q.QuadrantId">@q.Quadrant</option>
+                <option value="@q.QuadrantId">@q.Quadrants</option>
             }
         </select><br />
 
@@ -30,7 +30,7 @@
             <option value="">Select a Category</option>
             @foreach (Category c in ViewBag.Categories)
             {
-                <option value="@q.CategoryId">@q.Categories</option>
+                <option value="@c.CategoryId">@c.Categories</option>
             }
         </select><br />
 
