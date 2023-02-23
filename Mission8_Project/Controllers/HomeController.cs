@@ -57,7 +57,7 @@ namespace Mission8_Project.Controllers
         {
             var tasks = tContext.Responses
                 .Include(x => x.Category)
-                //.Where(x => x.CreeperStalker == false)
+                .Include(x => x.Quadrant)
                 .OrderBy(x => x.Task)
                 .ToList();
 
