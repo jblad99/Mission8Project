@@ -1,4 +1,6 @@
-﻿@{
+﻿<!--Displays all the tasks and their associated info arranged by quadrant-->
+
+@{
     ViewData["Title"] = "Time Management Matrix";
 }
 @model List<TaskForm>
@@ -18,15 +20,15 @@
         {
             @if (x.Completed == false)
             {
-                    <tr>
-                        <td>@x.Task</td>
-                        <td>@x.DueDate</td>
-                        <td>@x.Category.Categories</td>
-                        <td>@x.Quadrant.Quadrants</td>
-                        <td><a asp-controller="Home" asp-action="Completed" asp-route-id="@x.TaskId">Completed</a></td>
-                        <td><a asp-controller="Home" asp-action="Edit" asp-route-id="@x.TaskId">Edit</a></td>
-                        <td><a asp-controller="Home" asp-action="Delete" asp-route-id="@x.TaskId">Delete</a></td>
-                    </tr>
+                <tr>
+                    <td>@x.Task</td>
+                    <td>@x.DueDate</td>
+                    <td>@x.Category.Categories</td>
+                    <td>@x.Quadrant.Quadrants</td>
+                    <td><a asp-controller="Home" asp-action="Completed" asp-route-id="@x.TaskId">Completed</a></td>
+                    <td><a asp-controller="Home" asp-action="Edit" asp-route-id="@x.TaskId">Edit</a></td>
+                    <td><a asp-controller="Home" asp-action="Delete" asp-route-id="@x.TaskId">Delete</a></td>
+                </tr>
             }
         }
     </tbody>
