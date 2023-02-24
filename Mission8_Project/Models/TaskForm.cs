@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Tasks model, including category and quadrant models
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;

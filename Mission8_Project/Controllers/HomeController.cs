@@ -27,7 +27,7 @@ namespace Mission8_Project.Controllers
         [HttpGet]
         public IActionResult NewTask()
         {
-            //Includes the separate categories class in the MoviesForm view
+            //Includes the separate categories and quadrants classes
             ViewBag.Categories = tContext.Categories.ToList();
             ViewBag.Quadrants = tContext.Quadrants.ToList();
 
@@ -58,7 +58,7 @@ namespace Mission8_Project.Controllers
             var tasks = tContext.Responses
                 .Include(x => x.Category)
                 .Include(x => x.Quadrant)
-                .OrderBy(x => x.Task)
+                .OrderBy(x => x.Quadrant)
                 .ToList();
 
             return View(tasks);
@@ -69,6 +69,7 @@ namespace Mission8_Project.Controllers
             ViewBag.Categories = tContext.Categories.ToList();
             ViewBag.Quadrants = tContext.Quadrants.ToList();
 
+            //pulls a single task to edit the values
             var task = tContext.Responses.Single(x => x.TaskId == id);
 
             return View("NewTask", task);
@@ -85,6 +86,7 @@ namespace Mission8_Project.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
+            //pulling a single value to delete from the database
             var task = tContext.Responses.Single(x => x.TaskId == id);
 
             return View(task);
@@ -92,7 +94,7 @@ namespace Mission8_Project.Controllers
         [HttpPost]
         public IActionResult Delete(TaskForm t)
         {
-            //Delete a movie from the database
+            //Delete a task from the database
             tContext.Responses.Remove(t);
             tContext.SaveChanges();
 
@@ -102,6 +104,7 @@ namespace Mission8_Project.Controllers
         [HttpGet]
         public IActionResult Completed(int id)
         {
+            //pulling a single task to mark as completed
             ViewBag.Categories = tContext.Categories.ToList();
             ViewBag.Quadrants = tContext.Quadrants.ToList();
             var task = tContext.Responses.Single(x => x.TaskId == id);
@@ -111,6 +114,7 @@ namespace Mission8_Project.Controllers
         [HttpPost]
         public IActionResult Completed(TaskForm t)
         {
+            //updating the task as completed
             tContext.Update(t);
             tContext.SaveChanges();
 
